@@ -4,8 +4,15 @@ ROUTINE test
     Set rs=##class(%ResultSet).%New("Ens.Enterprise.Portal.MonitorModel:getMatrix")
     Do rs.Execute()
     While(rs.%Next()) {
-        Do rs.%Print()
+        Set Color=rs.Get("Color")
+        Set ClientName=rs.Get("ClientName")
+        Set SystemSpecs=rs.Get("SystemSpecs")
+        zw rs
+        ;Do rs.%Print()
     }
+    // It locks Ens related globals. 
+    k rs 
+
     /*
     1,0,0,0,11 iris1 0 実行中 Dummy.Production "iris : DUMMY1" "2023-06-13 10:10"  iris:52773 DUMMY1 %25CSP.Portal.Home.zen /csp/dummy1/ 2023.1.0.229.1.
     2,0,0,0,10 iris2 0 実行中 Dummy.Production "iris : DUMMY2" "2023-06-12 17:15"  iris:52773 DUMMY2 %25CSP.Portal.Home.zen /csp/dummy2/ 2023.1.0.229.1.
@@ -27,5 +34,4 @@ ROUTINE test
     ^IRIS.Temp.Ens.EntMonitorStatus("MONITOR","iris1","1.10","Status")="OK" <== 
 
     */
-
     

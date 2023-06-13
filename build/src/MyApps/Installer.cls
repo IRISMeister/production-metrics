@@ -31,11 +31,11 @@ XData setup [ XMLNamespace = INSTALLER ]
     <Production Name="Dummy.Production" AutoStart="0">
     </Production>
   </Namespace>
-  <Namespace Name="MONITOR" Create="yes" Code="MONITOR" Ensemble="1" Data="MONITOR">
+  <Namespace Name="emonitor" Create="yes" Code="emonitor" Ensemble="1" Data="emonitor">
     <Configuration>
-      <Database Name="MONITOR" Dir="MONITOR" Create="yes" Resource="%DB_MONITOR"/>
+      <Database Name="emonitor" Dir="emonitor" Create="yes" Resource="%DB_emonitor"/>
     </Configuration>
-    <CSPApplication Url="/csp/MONITOR" Directory="${CSPDIR}MONITOR" Resource=""/>
+    <CSPApplication Url="/csp/emonitor" Directory="${CSPDIR}emonitor" Resource=""/>
     <Import File="${SRCDIR}/EM/" Flags="ck" Recurse="true"/>
     <Production Name="EM.Production" AutoStart="1">
     </Production>
@@ -61,7 +61,13 @@ ClassMethod setup(ByRef tVars) As %Status
     New $NAMESPACE
     Set $NAMESPACE="%SYS"
 
-    Set $NAMESPACE="MONITOR"
+    #; /csp/emonitorをAnalytics有効に。(Portlet使用のため)
+    Set webapp="/csp/emonitor"
+    Set tSC = ##Class(Security.Applications).Get(webapp,.props)
+    Set props("DeepSeeEnabled")=1
+    Set tSC = ##Class(Security.Applications).Modify(webapp,.props)
+
+    Set $NAMESPACE="emonitor"
     Set tSC=##class(Ens.Config.Credentials).SetCredential("MONITOR","SuperUser","SYS",1)
     Set emcli=##class(Ens.Enterprise.MonitorClient).%New()
     Set emcli.Name="iris1"
