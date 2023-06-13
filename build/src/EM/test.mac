@@ -1,0 +1,31 @@
+ROUTINE test
+    // Stored Proc定義されていないため、%SQL.Statementを使えない
+    // http://localhost:52773/csp/documatic/%25CSP.Documatic.cls?PAGE=CLASS&LIBRARY=MONITOR&CLASSNAME=Ens.Enterprise.Portal.MonitorModel
+    Set rs=##class(%ResultSet).%New("Ens.Enterprise.Portal.MonitorModel:getMatrix")
+    Do rs.Execute()
+    While(rs.%Next()) {
+        Do rs.%Print()
+    }
+    /*
+    1,0,0,0,11 iris1 0 実行中 Dummy.Production "iris : DUMMY1" "2023-06-13 10:10"  iris:52773 DUMMY1 %25CSP.Portal.Home.zen /csp/dummy1/ 2023.1.0.229.1.
+    2,0,0,0,10 iris2 0 実行中 Dummy.Production "iris : DUMMY2" "2023-06-12 17:15"  iris:52773 DUMMY2 %25CSP.Portal.Home.zen /csp/dummy2/ 2023.1.0.229.1.
+    2,0,0,0,10 iris3 0 実行中 Dummy.Production "iris : DUMMY3" "2023-06-12 17:15"  iris:52773 DUMMY3 %25CSP.Portal.Home.zen /csp/dummy3/ 2023.1.0.229.1.
+    ^^^^^^^^^^
+    Set itemStatus = ^IRIS.Temp.Ens.EntMonitorStatus($namespace,ClientName,node,"Status")
+    Set j = $Case(itemStatus,"error":1,"Error":1,"N/A":1,"inactive":2,"Inactive":2,"stopped":3,"Stopped":3,"disabled":4,"Disabled":4,:5)
+    Set color = itemState(1)_","_itemState(2)_","_itemState(3)_","_itemState(4)_","_itemState(5)
+    
+    5は"OK"として扱われている。
+
+    Operation: HealthyをDisabledにしても、OKのままになっている。
+    ^IRIS.Temp.Ens.EntMonitorStatus("MONITOR","iris1",1.9,"Status")="OK"
+    ^IRIS.Temp.Ens.EntMonitorStatus("MONITOR","iris1","1.10","%Name")="Healthy"
+    ^IRIS.Temp.Ens.EntMonitorStatus("MONITOR","iris1","1.10","%Type")="Host"
+    ^IRIS.Temp.Ens.EntMonitorStatus("MONITOR","iris1","1.10","CompletedCount")=324
+    ^IRIS.Temp.Ens.EntMonitorStatus("MONITOR","iris1","1.10","HostType")=3
+    ^IRIS.Temp.Ens.EntMonitorStatus("MONITOR","iris1","1.10","LastActivity")="2023-06-13 01:37:14.651"
+    ^IRIS.Temp.Ens.EntMonitorStatus("MONITOR","iris1","1.10","Status")="OK" <== 
+
+    */
+
+    

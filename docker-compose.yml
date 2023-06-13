@@ -1,0 +1,21 @@
+version: '3.7'
+#
+services:
+  iris:
+    build:
+      context: ./build
+    hostname: iris
+    command: --ISCAgent false --monitorCPF false --key /ISC/license/iris.key
+    ports:
+    # superserver default port 
+    - "9103:1972"
+    # webserver/management portal port
+    - "52873:52773"
+
+    volumes:
+    - ./license:/ISC/license/
+    - ./UserCPF:/home/irisowner/cpf
+
+    environment:
+    - TZ=JST-9
+    - ISC_CPF_MERGE_FILE=/home/irisowner/cpf/merge.cpf

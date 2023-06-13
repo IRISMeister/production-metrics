@@ -1,0 +1,15 @@
+ROUTINE direct
+#include %occStatus
+
+main() {
+    Set Value=0
+	Set tSC = ##class(Ens.Director).CreateBusinessService("Dummy.Service.Direct",.tService)
+	If ($IsObject(tService)) {
+    	Set pRequest = ##class(Ens.StringContainer).%New()
+		Set pRequest.StringValue={"Value":(Value),"TimeStamp":($ZDATETIME($H,3))}.%ToJSON()
+		Set tSC = tService.ProcessInput(pRequest,.output)
+		If $$$ISERR(tSC) { Write "Error :"_tSC,! }
+		zw output
+	}	
+
+}

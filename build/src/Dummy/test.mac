@@ -1,0 +1,29 @@
+ROUTINE test
+
+    set tSC=##class(Ens.Util.CSPMonitor).GetMatrix(.m)
+    Set count=m.SubItems.Count()
+    For i=1:1:count {
+        Set item=m.SubItems.GetAt(i)
+        w item.Name," ",item.Value.GetAt("Status"),!
+    }
+    /*
+DUMMY1>d ^test
+Dummy.Service.HeartBeat OK
+Ens.Actor OK
+Ens.Alarm OK
+Ens.MonitorService OK
+Ens.ScheduleHandler OK
+Ens.ScheduleService OK
+EnsLib.Background.Process.ExportMessageSearch OK
+EnsLib.Background.Service OK
+EnsLib.Background.Workflow.Operation OK
+Healthy OK  <== 無効化しているホストが"OK"で報告されている
+NotSoHealthy OK
+ReallyBad Error
+
+
+^IRIS.Temp.EnsHostMonitor("DUMMY1","Healthy","%Count")=324
+^IRIS.Temp.EnsHostMonitor("DUMMY1","Healthy","%LastActivity")="2023-06-13 01:37:14.651"
+^IRIS.Temp.EnsHostMonitor("DUMMY1","Healthy","%Status")="OK" 
+
+*/  
