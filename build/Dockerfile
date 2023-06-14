@@ -1,4 +1,4 @@
-FROM containers.intersystems.com/intersystems/iris:2023.1.0.229.0
+FROM containers.intersystems.com/intersystems/iris:2023.1.0.235.1
 
 USER root
 #ENV DEBIAN_FRONTEND noninteractive
