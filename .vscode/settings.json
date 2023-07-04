@@ -12,7 +12,7 @@
     },
     "objectscript.conn": {
         "server": "iris",
-        "ns": "DUMMY1",
+        "ns": "EMONITOR",
         "active": true
     }
 }

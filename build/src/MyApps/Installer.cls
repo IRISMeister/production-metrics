@@ -19,7 +19,7 @@ XData setup [ XMLNamespace = INSTALLER ]
     </Configuration>
     <CSPApplication Url="/csp/DUMMY2" Directory="${CSPDIR}DUMMY2" Resource=""/>
     <Import File="${SRCDIR}/Dummy/" Flags="ck" Recurse="true"/>
-    <Production Name="Dummy.Production" AutoStart="0">
+    <Production Name="Dummy.Production2" AutoStart="1">
     </Production>
   </Namespace>
   <Namespace Name="DUMMY3" Create="yes" Code="DUMMY3" Ensemble="1" Data="DUMMY3">
@@ -28,7 +28,7 @@ XData setup [ XMLNamespace = INSTALLER ]
     </Configuration>
     <CSPApplication Url="/csp/DUMMY3" Directory="${CSPDIR}DUMMY3" Resource=""/>
     <Import File="${SRCDIR}/Dummy/" Flags="ck" Recurse="true"/>
-    <Production Name="Dummy.Production" AutoStart="0">
+    <Production Name="Dummy.Production" AutoStart="1">
     </Production>
   </Namespace>
   <Namespace Name="emonitor" Create="yes" Code="emonitor" Ensemble="1" Data="emonitor">
